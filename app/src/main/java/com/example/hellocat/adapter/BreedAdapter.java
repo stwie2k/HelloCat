@@ -4,8 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.hellocat.Breed;
 import com.example.hellocat.R;
 
@@ -29,7 +31,9 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
 
     @Override
     public void onBindViewHolder(ViewHodel holder, int position) {
-//        Glide.with(context).load(data.get(position).getCover_image_url()).into(holder.im);
+        Glide.with(context)
+                .load(data.get(position).getImg_url())
+                .into(holder.iv);
         holder.tv.setText(data.get(position).getName());
     }
 
@@ -41,10 +45,12 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
     static class ViewHodel extends RecyclerView.ViewHolder {
 
         public final TextView tv;
+        public final ImageView iv;
 
         public ViewHodel(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
+            iv=itemView.findViewById(R.id.iv);
 
         }
     }

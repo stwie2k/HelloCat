@@ -18,12 +18,9 @@ public interface RemoteService {
 
     Observable<List<Breed>> getBreeds();
 
-    @GET("/users/{user_name}/repos")
-        // 这里的List<Repo>即为最终返回的类型，需要保持一致才可解析
-        // 之所以使用一个List包裹是因为该接口返回的最外层是一个数组
-        //Call<List<Repo>> getRepo(@Path("user_name") String user_name);
-        // 特别地，使用rxJava时为
-    Observable<List<Breed>> getRepo(@Path("user_name") String user_name);
+    @GET("/v1/images/search")
+
+    Observable<List<BreedImage>> getImage(@Query("breed_id")  String breed_id);
 
 
 
