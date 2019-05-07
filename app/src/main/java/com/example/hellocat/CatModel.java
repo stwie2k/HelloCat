@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CatModel implements Cantranct.IModel {
+public class CatModel implements Contract.IModel {
     public void model(final CallBack callBack){
         OkHttpClient build = new OkHttpClient.Builder()
                 .connectTimeout(2, TimeUnit.SECONDS)
@@ -22,14 +22,13 @@ public class CatModel implements Cantranct.IModel {
         String baseURL="https://api.thecatapi.com";
 
         Retrofit retrofit = new Retrofit.Builder()
+
                 .baseUrl(baseURL)
 
-                // 本次实验不需要自定义Gson
                 .addConverterFactory(GsonConverterFactory.create())
 
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
-                // build 即为okhttp声明的变量，下文会讲
                 .client(build)
 
                 .build();

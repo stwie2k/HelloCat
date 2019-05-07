@@ -2,7 +2,7 @@ package com.example.hellocat;
 
 import java.util.List;
 
-public class Cantranct {
+public class Contract {
     //M层接口及方法： 获取数据
     public interface IModel {
         //M层获取请求数据的方法 方法参数为下面的接口对象
