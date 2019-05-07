@@ -1,10 +1,13 @@
-package com.example.hellocat;
+package com.example.hellocat.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.hellocat.Breed;
+import com.example.hellocat.R;
 
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
     @Override
     public void onBindViewHolder(ViewHodel holder, int position) {
 //        Glide.with(context).load(data.get(position).getCover_image_url()).into(holder.im);
-        holder.tv.setText(data.get(position).name);
+        holder.tv.setText(data.get(position).getName());
     }
 
     @Override

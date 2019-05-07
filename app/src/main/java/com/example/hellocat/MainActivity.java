@@ -1,13 +1,12 @@
 package com.example.hellocat;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
@@ -17,13 +16,19 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity {
     MvpPresenter mPresenter;
 
+
+    @BindView(R.id.tl_tabs)
     TabLayout tabLayout;
+    @BindView(R.id.vp_content)
     ViewPager viewPager;
-    List<String> titles = new ArrayList<>();
-    private RecyclerView mRecyclerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -33,8 +38,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tabLayout = findViewById(R.id.tl_tabs);
-        viewPager = findViewById(R.id.vp_content);
+        ButterKnife.bind(this);
+
 
 
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
@@ -45,14 +50,14 @@ public class MainActivity extends AppCompatActivity{
                 switch (position) {
                     case 0:
 
-                        return  new BreedFragment();
+                        return new com.example.hellocat.fragment.BreedFragment();
                     case 1:
 
                     case 2:
 
 
                     default:
-                        return new BreedFragment();
+                        return new com.example.hellocat.fragment.BreedFragment();
                 }
             }
 
@@ -78,16 +83,13 @@ public class MainActivity extends AppCompatActivity{
                     case 2:
 
                     default:
-                       return "ff";
+                        return "ff";
                 }
 
             }
         });
 
         tabLayout.setupWithViewPager(viewPager);
-
-
-
 
 
     }

@@ -1,9 +1,10 @@
-package com.example.hellocat;
+package com.example.hellocat.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {  //定义基类实现懒加载
     boolean mIsPrepare = false;		//视图还没准备好
@@ -50,6 +51,8 @@ public abstract class BaseFragment extends Fragment {  //定义基类实现懒�
         mIsPrepare=false;
         mIsVisible = false;
     }
+
+
 
 
 }
