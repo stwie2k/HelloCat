@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
-
-
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:

@@ -1,6 +1,13 @@
 package com.example.hellocat;
 
+import android.util.Log;
+
+import com.example.hellocat.bean.Breed;
+import com.example.hellocat.bean.BreedImage;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -12,11 +19,16 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class CatModel implements Contract.IModel {
     Observable<List<Breed>> observable1;
     Observable<BreedImage> observable2;
     List<Breed> data;
     RemoteService service;
+    int index;
+    Map<Integer,Breed> map=new HashMap();
+    @Override
     public void model(final CallBack callBack){
         OkHttpClient build = new OkHttpClient.Builder()
                 .connectTimeout(2, TimeUnit.SECONDS)
@@ -42,42 +54,74 @@ public class CatModel implements Contract.IModel {
          service = retrofit.create(RemoteService.class);
 
 
-
-
-        service.getBreeds()
-//                .flatMap(new Func1<String, Observable<User>>() {  //得到token后获取用户信息
+//        service.getBreeds()//这里模拟请求数据集合
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//
+//                .flatMap(new Function<List<Breed>, ObservableSource<Breed>>() {
 //                    @Override
-//                    public Observable<User> onNext(String token) {
-//                        return service.getImage(token);
-//                    })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnNext(new Action1<List<Breed>>() {
-//                    @Override
-//                    public void call(List<Breed> l) {
-//                        saveUserInfo(l);//保存用户信息到本地
+//                    public ObservableSource<Breed> apply(@NonNull List<Breed> l) throws Exception {
+//                       index = 0;
+//                        return Observable.fromIterable(l);
 //                    }
 //                })
-//
-//
-//               .observeOn(AndroidSchedulers.mainThread())//最后在主线程中执行
-//                .subscribe(new Subscriber<List<Breed>>() {
+//                //单独处理每个数据
+//                .map(new Function<Breed, String>() {
 //                    @Override
-//                    public void onCompleted() {
+//                    public String apply(@NonNull Breed b) throws Exception {
+//                        //这里需要使用map来绑定对象跟key key可以使用integer
+//                        map.put(index, b);
+//                        return b.getName();
+//                    }
+//                })
+//                .observeOn(Schedulers.io())
+//                .flatMap(new Function<String, ObservableSource<List<BreedImage>>>() {
+//                    @Override
+//                    public ObservableSource<List<BreedImage>> apply(@NonNull String ps) throws Exception {
+//                        //这边处理url 应该是请求接口B 我这就简单点处理了
+//                        ObservableSource<List<BreedImage>> o=service.getImage(ps);
+//                        return o;
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//
+//                .subscribe(new DisposableObserver<List<BreedImage>>() {
+//                    @Override
+//                    public void onComplete() {
+//
+//
 //
 //                    }
 //
 //                    @Override
 //                    public void onError(Throwable e) {
-//                        //请求失败
+//
 //                    }
 //
 //                    @Override
-//                    public void onNext(UserInfo userInfo) {
-//                        //请求成功
-//                        callBack.callData(l);
+//                    public void onNext(List<BreedImage> l) {
+//
+//                        for (BreedImage v : l) {
+//
+//                        }
 //                    }
+//
+//
+//
+//
+//
+//
+//
+//
 //                });
+
+
+
+        service.getBreeds()
+
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
 
 
                 .subscribe(new DisposableObserver<List<Breed>>() {
@@ -90,6 +134,10 @@ public class CatModel implements Contract.IModel {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d(TAG, e.toString());
+
+                        data=DBHelper.getBreeds();
+                        callBack.callData(data);
 
                     }
 
@@ -99,8 +147,6 @@ public class CatModel implements Contract.IModel {
                         data=l;
 
                         getimage(callBack);
-
-
 
 
 
@@ -117,6 +163,7 @@ public class CatModel implements Contract.IModel {
 
     }
     public void getimage(final CallBack callBack){
+
         for(int i=0;i<data.size();i++){
             final int index=i;
             service.getImage(data.get(i).getId())
@@ -142,7 +189,9 @@ public class CatModel implements Contract.IModel {
                             data.get(index).setImg_url(b.url);
 
 
+
                             if(index==data.size()-1){
+                                DBHelper.addBreed(data);
                                 callBack.callData(data);
                             }
 

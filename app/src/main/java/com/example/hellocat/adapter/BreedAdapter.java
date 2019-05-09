@@ -8,14 +8,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.hellocat.Breed;
+import com.example.hellocat.bean.Breed;
 import com.example.hellocat.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
     private Context context;
     private List<Breed> data ;
+    private OnItemClickListener mClickListener;
 
     public BreedAdapter(Context context, List<Breed> data) {
         this.context = context;
@@ -30,11 +34,21 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
 
 
     @Override
-    public void onBindViewHolder(ViewHodel holder, int position) {
+    public void onBindViewHolder(ViewHodel holder, final int position) {
         Glide.with(context)
                 .load(data.get(position).getImg_url())
                 .into(holder.iv);
         holder.tv.setText(data.get(position).getName());
+
+        if (mClickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mClickListener.onItemClick(position);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -42,15 +56,27 @@ public class BreedAdapter extends RecyclerView.Adapter<BreedAdapter.ViewHodel> {
         return data.size() != 0 ? data.size() : 0;
     }
 
+    public interface OnItemClickListener {
+        public void onItemClick(int postion);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mClickListener = listener;
+    }
+
     static class ViewHodel extends RecyclerView.ViewHolder {
 
-        public final TextView tv;
-        public final ImageView iv;
+        @BindView(R.id.tv)
+        TextView tv;
+        @BindView(R.id.iv)
+        ImageView iv;
+
 
         public ViewHodel(View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.tv);
-            iv=itemView.findViewById(R.id.iv);
+
+
+            ButterKnife.bind(this,itemView);
 
         }
     }

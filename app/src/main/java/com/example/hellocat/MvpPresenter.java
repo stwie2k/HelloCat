@@ -1,6 +1,8 @@
 package com.example.hellocat;
 
 
+import com.example.hellocat.bean.Breed;
+
 import java.util.List;
 
 public class MvpPresenter implements Contract.IPresenter {
