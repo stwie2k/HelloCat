@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hellocat.presenter.BreedPresenter;
 import com.example.hellocat.BreedWikiActivity;
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.Contract;
-import com.example.hellocat.MvpPresenter;
 import com.example.hellocat.R;
 import com.example.hellocat.adapter.BreedAdapter;
 
@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BreedFragment extends BaseFragment implements Contract.IView{
-    MvpPresenter mPresenter;
+    BreedPresenter mPresenter;
 
 
 
@@ -41,7 +41,7 @@ public class BreedFragment extends BaseFragment implements Contract.IView{
     }
     @Override
     public void loadData(){
-        mPresenter = new MvpPresenter(this);
+        mPresenter = new BreedPresenter(this);
         mPresenter.presenter();
     }
     @Override//从P层获取到的数据  在P层里获取到M层请求的数据

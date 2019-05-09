@@ -10,7 +10,9 @@ public class DBHelper {
         DaoSession daoSession = BaseApplication.getDaoSession();
         List<Breed> breeds = daoSession.loadAll(Breed.class);
 
-        if(breeds.size()>0)return;
+        if(breeds.size()>0){
+            return;
+        }
 
 
         for(int i=0;i<breedList.size();i++){

@@ -10,7 +10,7 @@ public class Contract2 {
 
     public interface ILisener<T> {
         //M层获取请求数据的方法 方法参数为下面的接口对象
-        void loadSuccessful(List<T> l);
+        void loadSuccessful(T l);
 
 
     }

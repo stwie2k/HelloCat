@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    MvpPresenter mPresenter;
+
 
 
     @BindView(R.id.tl_tabs)

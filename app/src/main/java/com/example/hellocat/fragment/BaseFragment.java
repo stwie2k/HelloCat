@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {  //定义基类实现懒加载
-    boolean mIsPrepare = false;		//视图还没准备好
-    boolean mIsVisible= false;		//不可见
-    boolean mIsFirstLoad = true;	//第一次加载
+    boolean mIsPrepare = false;
+    //视图还没准备好
+    boolean mIsVisible= false;
+    //不可见
+    boolean mIsFirstLoad = true;
+    //第一次加载
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

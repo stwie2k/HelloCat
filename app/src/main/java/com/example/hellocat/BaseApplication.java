@@ -10,9 +10,6 @@ import com.facebook.stetho.Stetho;
 
 public class BaseApplication extends Application {
 
-
-
- //创建
       @Override
       public void onCreate() {
          super.onCreate();

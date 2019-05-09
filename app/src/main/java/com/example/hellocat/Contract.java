@@ -8,12 +8,12 @@ public class Contract {
     //M层接口及方法： 获取数据
     public interface IModel {
         //M层获取请求数据的方法 方法参数为下面的接口对象
-        void model(CallBack callBack);
+        void getModel(CallBack callBack);
 
         //M层获取到数据之后 存入这个接口的方法然后把数据回调给P层
-        interface CallBack {
+        interface CallBack <T>{
             //方法的参数保存m层获取到的数据 然后回调给P层
-            void callData(List<Breed> comics);
+            void callData(List<T> comics);
         }
     }
 

@@ -1,9 +1,13 @@
-package com.example.hellocat;
+package com.example.hellocat.model;
 
 import android.util.Log;
 
+import com.example.hellocat.Contract;
+import com.example.hellocat.DBHelper;
+import com.example.hellocat.RemoteService;
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.bean.BreedImage;
+import com.example.hellocat.network.NetworkHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,29 +33,10 @@ public class CatModel implements Contract.IModel {
     int index;
     Map<Integer,Breed> map=new HashMap();
     @Override
-    public void model(final CallBack callBack){
-        OkHttpClient build = new OkHttpClient.Builder()
-                .connectTimeout(2, TimeUnit.SECONDS)
-                .readTimeout(2, TimeUnit.SECONDS)
-                .writeTimeout(2, TimeUnit.SECONDS)
-                .build();
-
-        String baseURL="https://api.thecatapi.com";
-
-        Retrofit retrofit = new Retrofit.Builder()
-
-                .baseUrl(baseURL)
-
-                .addConverterFactory(GsonConverterFactory.create())
-
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-
-                .client(build)
-
-                .build();
+    public void getModel(final CallBack callBack){
 
 
-         service = retrofit.create(RemoteService.class);
+         service = NetworkHelper.getRetrofit().create(RemoteService.class);
 
 
 //        service.getBreeds()//这里模拟请求数据集合
@@ -136,7 +121,7 @@ public class CatModel implements Contract.IModel {
                     public void onError(Throwable e) {
                         Log.d(TAG, e.toString());
 
-                        data=DBHelper.getBreeds();
+                        data= DBHelper.getBreeds();
                         callBack.callData(data);
 
                     }
