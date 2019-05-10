@@ -21,7 +21,6 @@ public class BreedWikiActivity extends Activity {
 
 
 
-
         activityBreedwikiBinding.setBreedwiki(new WikiViewModel(id));
 
 

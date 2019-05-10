@@ -24,9 +24,9 @@ public class Contract {
     }
 
     //V层接口 ：接收数据 显示数据
-    public interface IView {
+    public interface IView <T>{
         //方法的参数用于接收在P层里通过M层获取到的数据
-        void view(List<Breed> comics);
+        void view(List<T> comics);
     }
 
 }

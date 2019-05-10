@@ -1,5 +1,13 @@
 package com.example.hellocat.bean;
 
+import com.google.gson.Gson;
+
+import org.greenrobot.greendao.annotation.Convert;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.converter.PropertyConverter;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class FavouriteCats {
     public String created_at;
 
@@ -12,10 +20,28 @@ public class FavouriteCats {
      */
 
     private int id;
+
+    @Convert(converter = FavoriteCatConvert.class, columnType = String.class)
+
     private ImageBean image;
     private String image_id;
     private String sub_id;
     private String user_id;
+
+    @Generated(hash = 359716108)
+    public FavouriteCats(String created_at, int id, ImageBean image, String image_id,
+            String sub_id, String user_id) {
+        this.created_at = created_at;
+        this.id = id;
+        this.image = image;
+        this.image_id = image_id;
+        this.sub_id = sub_id;
+        this.user_id = user_id;
+    }
+
+    @Generated(hash = 1175916924)
+    public FavouriteCats() {
+    }
 
     public int getId() {
         return id;
@@ -57,6 +83,14 @@ public class FavouriteCats {
         this.user_id = user_id;
     }
 
+    public String getCreated_at() {
+        return this.created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
     public static class ImageBean {
         /**
          * id : 9ccXTANkb
@@ -80,6 +114,23 @@ public class FavouriteCats {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+    }
+
+    public static class FavoriteCatConvert implements PropertyConverter<ImageBean, String> {
+
+        private static Gson mGson = new Gson();
+
+        @Override
+        public ImageBean convertToEntityProperty(String databaseValue) {
+            ImageBean catFavoriteImage = mGson.fromJson(databaseValue, ImageBean.class);
+
+            return catFavoriteImage;
+        }
+
+        @Override
+        public String convertToDatabaseValue(ImageBean entityProperty) {
+            return mGson.toJson(entityProperty);
         }
     }
 }

@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.example.hellocat.fragment.BreedFragment;
+import com.example.hellocat.fragment.FavouriteFragment;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -48,14 +50,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
 
-                        return new com.example.hellocat.fragment.BreedFragment();
+                        return new BreedFragment();
                     case 1:
+                        return new FavouriteFragment();
 
                     case 2:
 
 
                     default:
-                        return new com.example.hellocat.fragment.BreedFragment();
+                        return new BreedFragment();
                 }
             }
 
@@ -75,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        return "catbreed";
+                        return "Breed";
                     case 1:
+                        return "Favourite";
 
                     case 2:
 

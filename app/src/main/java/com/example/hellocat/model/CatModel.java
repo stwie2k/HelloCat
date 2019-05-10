@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.hellocat.Contract;
 import com.example.hellocat.DBHelper;
-import com.example.hellocat.RemoteService;
+import com.example.hellocat.network.RemoteService;
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.bean.BreedImage;
 import com.example.hellocat.network.NetworkHelper;
@@ -12,22 +12,15 @@ import com.example.hellocat.network.NetworkHelper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.support.constraint.Constraints.TAG;
 
 public class CatModel implements Contract.IModel {
-    Observable<List<Breed>> observable1;
-    Observable<BreedImage> observable2;
+
     List<Breed> data;
     RemoteService service;
     int index;
@@ -132,7 +125,6 @@ public class CatModel implements Contract.IModel {
                         data=l;
 
                         getimage(callBack);
-
 
 
 

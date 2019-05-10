@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BreedFragment extends BaseFragment implements Contract.IView{
+public class BreedFragment extends BaseFragment implements Contract.IView<Breed>{
     BreedPresenter mPresenter;
 
 

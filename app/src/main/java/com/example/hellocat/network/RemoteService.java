@@ -1,4 +1,4 @@
-package com.example.hellocat;
+package com.example.hellocat.network;
 
 
 import com.example.hellocat.bean.Breed;
@@ -32,7 +32,7 @@ public interface RemoteService {
     @GET("/v1/images/search")
     Call<List<BreedImage>> getImage2(@Query("breed_id")  String breed_id);
 
-    @Headers("992d0a64-e243-4c2e-a800-4c5f2f33d041")
+    @Headers("x-api-key:992d0a64-e243-4c2e-a800-4c5f2f33d041")
     @GET("/v1/favourites")
     Observable<List<FavouriteCats>> getFavorites();
 
