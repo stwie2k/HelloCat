@@ -13,7 +13,7 @@ public class BreedWikiActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        ActivityBreedwikiBinding activityBreedwikiBinding= DataBindingUtil.setContentView(this,R.layout.activity_breedwiki);
+        ActivityBreedwikiBinding activityBreedwikiBinding= DataBindingUtil.setContentView(this,R.layout.activity_breed_wiki);
 
 
         Intent intent=getIntent();

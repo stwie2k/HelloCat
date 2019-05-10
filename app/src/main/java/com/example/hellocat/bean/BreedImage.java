@@ -1,7 +1,15 @@
 package com.example.hellocat.bean;
 
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.greendao.annotation.Convert;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.converter.PropertyConverter;
+
+import java.util.List;
+import org.greenrobot.greendao.annotation.Generated;
+@Entity
 public class BreedImage {
     public String url;
     public String id;
@@ -11,8 +19,43 @@ public class BreedImage {
      * width : 1795
      * height : 2397
      */
-
+    @Convert(converter = BreedImage.BreedImageConvert.class, columnType = String.class)
     public List<BreedsBean> breeds;
+
+    @Generated(hash = 2094909494)
+    public BreedImage(String url, String id, List<BreedsBean> breeds) {
+        this.url = url;
+        this.id = id;
+        this.breeds = breeds;
+    }
+
+    @Generated(hash = 1080796236)
+    public BreedImage() {
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<BreedsBean> getBreeds() {
+        return this.breeds;
+    }
+
+    public void setBreeds(List<BreedsBean> breeds) {
+        this.breeds = breeds;
+    }
 
     public class BreedsBean{
         public String name;
@@ -20,7 +63,25 @@ public class BreedImage {
         public String life_span;
         public String origin;
         public String temperament;
+        public String id;
 
 
+    }
+
+    public static class BreedImageConvert implements PropertyConverter<List<BreedImage.BreedsBean>, String> {
+
+        private static Gson mGson = new Gson();
+
+        @Override
+        public List<BreedImage.BreedsBean> convertToEntityProperty(String databaseValue) {
+            List<BreedImage.BreedsBean>breedsBeanList  = mGson.fromJson(databaseValue, new TypeToken<List<Object>>(){}.getType());
+
+            return breedsBeanList;
+        }
+
+        @Override
+        public String convertToDatabaseValue(List<BreedImage.BreedsBean>  entityProperty) {
+            return mGson.toJson(entityProperty);
+        }
     }
 }

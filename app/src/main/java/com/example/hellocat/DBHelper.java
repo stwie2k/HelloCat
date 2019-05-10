@@ -1,7 +1,9 @@
 package com.example.hellocat;
 
+import com.com.sky.downloader.greendao.BreedImageDao;
 import com.com.sky.downloader.greendao.DaoSession;
 import com.example.hellocat.bean.Breed;
+import com.example.hellocat.bean.BreedImage;
 import com.example.hellocat.bean.FavouriteCats;
 
 import java.util.List;
@@ -53,4 +55,41 @@ public class DBHelper {
         return favCat;
 
     }
+
+    public static void addBreedImage(BreedImage breedImage){
+        DaoSession daoSession = BaseApplication.getDaoSession();
+        BreedImageDao imageDao=daoSession.getBreedImageDao();
+
+        List<BreedImage> breedImageList = imageDao.queryBuilder()
+                .where(BreedImageDao.Properties.Id.eq(breedImage.id))
+
+                .build().list();
+
+        if(breedImageList.size()>0){
+            return;
+        }
+
+
+        daoSession.getBreedImageDao().insert(breedImage);
+
+
+    }
+
+    public static BreedImage getBreedImage(String Id){
+        DaoSession daoSession = BaseApplication.getDaoSession();
+        BreedImageDao imageDao=daoSession.getBreedImageDao();
+        List<BreedImage> breedImageList = imageDao.loadAll();
+
+         for(int i=0;i<breedImageList.size();i++){
+             String mId=breedImageList.get(i).breeds.get(0).id;
+             if(mId.equals(Id)){
+                 return breedImageList.get(i);
+             }
+         }
+
+        return null;
+
+    }
+
+
 }

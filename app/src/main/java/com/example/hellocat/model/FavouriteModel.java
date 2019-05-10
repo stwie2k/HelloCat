@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 import static android.support.constraint.Constraints.TAG;
 
 public class FavouriteModel implements Contract.IModel{
-    List<Breed> data;
+    List<FavouriteCats> data;
      RemoteService service;
     @Override
     public void getModel(final Contract.IModel.CallBack callBack){
@@ -44,22 +44,18 @@ public class FavouriteModel implements Contract.IModel{
                     @Override
                     public void onError(Throwable e) {
                         Log.d(TAG, e.toString());
-//
-//                        data= DBHelper.getBreeds();
-//                        callBack.callData(data);
+
+                        data= DBHelper.getFavourite();
+                        callBack.callData(data);
 
                     }
 
                     @Override
                     public void onNext(List<FavouriteCats> l) {
 
-                        DaoSession daoSession = BaseApplication.getDaoSession();
-                        List<FavouriteCats> cats = daoSession.loadAll(FavouriteCats.class);
+                       DBHelper.addFavourite(l);
 
                         callBack.callData(l);
-
-
-
 
 
 

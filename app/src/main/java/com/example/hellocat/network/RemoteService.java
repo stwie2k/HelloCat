@@ -29,12 +29,12 @@ public interface RemoteService {
     Observable<List<BreedImage>> getImage(@Query("breed_id")  String breed_id);
 
 
-    @GET("/v1/images/search")
-    Call<List<BreedImage>> getImage2(@Query("breed_id")  String breed_id);
 
     @Headers("x-api-key:992d0a64-e243-4c2e-a800-4c5f2f33d041")
     @GET("/v1/favourites")
     Observable<List<FavouriteCats>> getFavorites();
+
+
 
 
 }
