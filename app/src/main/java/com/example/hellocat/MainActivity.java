@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.example.hellocat.fragment.BreedFragment;
+import com.example.hellocat.fragment.CategoriesFragment;
 import com.example.hellocat.fragment.FavouriteFragment;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -49,14 +50,11 @@ public class MainActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-
                         return new BreedFragment();
                     case 1:
                         return new FavouriteFragment();
-
                     case 2:
-
-
+                        return new CategoriesFragment();
                     default:
                         return new BreedFragment();
                 }
@@ -81,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
                         return "Breed";
                     case 1:
                         return "Favourite";
-
                     case 2:
-
+                        return "categories";
                     default:
                         return "ff";
                 }
@@ -96,11 +93,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override//从P层获取到的数据  在P层里获取到M层请求的数据
-//    public void view(List<Breed> data) {
-//        BreedAdapter adapter = new BreedAdapter(this, data);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerView.setAdapter(adapter);
-//
-//    }
 }

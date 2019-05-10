@@ -42,7 +42,9 @@ public class WikiModel{
                         Log.d(TAG, e.toString());
 
                         BreedImage breedImage=DBHelper.getBreedImage(id);
-                        if(breedImage==null)return;
+                        if(breedImage==null){
+                            return;
+                        }
 
                         lisener.loadSuccessful(breedImage);
 

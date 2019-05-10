@@ -34,7 +34,9 @@ public interface RemoteService {
     @GET("/v1/favourites")
     Observable<List<FavouriteCats>> getFavorites();
 
+    @GET("/v1/categories")
 
+    Observable<List<BreedImage>> getCategories();
 
 
 }

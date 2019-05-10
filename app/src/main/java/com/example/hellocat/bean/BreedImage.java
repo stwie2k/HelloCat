@@ -74,7 +74,7 @@ public class BreedImage {
 
         @Override
         public List<BreedImage.BreedsBean> convertToEntityProperty(String databaseValue) {
-            List<BreedImage.BreedsBean>breedsBeanList  = mGson.fromJson(databaseValue, new TypeToken<List<Object>>(){}.getType());
+            List<BreedImage.BreedsBean>breedsBeanList  = mGson.fromJson(databaseValue, new TypeToken<List<BreedImage.BreedsBean>>(){}.getType());
 
             return breedsBeanList;
         }
