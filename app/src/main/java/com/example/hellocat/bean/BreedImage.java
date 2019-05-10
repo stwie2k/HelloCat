@@ -17,6 +17,10 @@ public class BreedImage {
     public class BreedsBean{
         public String name;
         public String description;
+        public String life_span;
+        public String origin;
+        public String temperament;
+
 
     }
 }
