@@ -3,8 +3,7 @@ package com.example.hellocat.model;
 import android.util.Log;
 
 import com.example.hellocat.contract.MvvmContract;
-import com.example.hellocat.DBHelper;
-import com.example.hellocat.bean.BreedImage;
+import com.example.hellocat.bean.Categories;
 import com.example.hellocat.network.NetworkHelper;
 import com.example.hellocat.network.RemoteService;
 
@@ -16,20 +15,21 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class WikiModel{
+public class CategoriesModel {
+
     static RemoteService service;
-    public static void getdata(final MvvmContract.ILisener lisener , final String id) {
+    public static void getdata(final MvvmContract.ILisener2<Categories> lisener ) {
 
 
-         service= NetworkHelper.getRetrofit().create(RemoteService.class);
+        service= NetworkHelper.getRetrofit().create(RemoteService.class);
 
 
-         service.getImage(id)
+        service.getCategories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
 
-                .subscribe(new DisposableObserver<List<BreedImage>>() {
+                .subscribe(new DisposableObserver<List<Categories>>() {
                     @Override
                     public void onComplete() {
 
@@ -39,25 +39,17 @@ public class WikiModel{
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, e.toString());
 
-                        BreedImage breedImage=DBHelper.getBreedImage(id);
-                        if(breedImage==null){
-                            return;
-                        }
-
-                        lisener.loadSuccessful(breedImage);
-
-
+                        Log.d(TAG, "onError: e");
 
                     }
 
                     @Override
-                    public void onNext(List<BreedImage> l) {
+                    public void onNext(List<Categories> l) {
 
-                        DBHelper.addBreedImage(l.get(0));
+                        lisener.loadSuccessful(l);
 
-                        lisener.loadSuccessful(l.get(0));
+
 
 
                     }

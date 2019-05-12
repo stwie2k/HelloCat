@@ -1,20 +1,20 @@
 package com.example.hellocat.presenter;
 
 
-import com.example.hellocat.Contract;
+import com.example.hellocat.contract.MvpContract;
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.model.CatModel;
 
 import java.util.List;
 
-public class BreedPresenter implements Contract.IPresenter {
+public class BreedPresenter implements MvpContract.IPresenter {
     //创建M层对象
     private CatModel model;
     //创建V层接口的对象
-    private Contract.IView iView;
+    private MvpContract.IView iView;
 
     //构造方法的参数为V层的接口对象
-    public BreedPresenter(Contract.IView iView) {
+    public BreedPresenter(MvpContract.IView iView) {
         //待会展示数据的类实现V接口 创建P层的时候 将本身传进来 也就是说P层和展示数据的类他俩使用的是共同的一个V层接口 自然这个V层接口方法里的数据就可以共用了
         this.iView = iView;
         //创建M层的时候自然运行M层实现的请求数据方法 现在可以理解为已经请求到了数据
@@ -24,7 +24,7 @@ public class BreedPresenter implements Contract.IPresenter {
     @Override//在这个方法里进行M层和V层的交互
     public void presenter() {
         //M层创建保存数据的callback接口对象 这个接口里方法的参数就是数据集合
-        model.getModel(new Contract.IModel.CallBack<Breed>() {
+        model.getModel(new MvpContract.IModel.CallBack<Breed>() {
             @Override
             public void callData(List<Breed> data) {
                 //然后再用V层接口对象保存数据 在V层里展示出来

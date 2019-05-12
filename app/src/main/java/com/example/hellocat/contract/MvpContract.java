@@ -1,10 +1,10 @@
-package com.example.hellocat;
+package com.example.hellocat.contract;
 
 import com.example.hellocat.bean.Breed;
 
 import java.util.List;
 
-public class Contract {
+public class MvpContract {
 
     public interface IModel {
 

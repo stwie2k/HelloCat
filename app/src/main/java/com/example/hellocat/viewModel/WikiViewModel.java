@@ -1,18 +1,17 @@
 package com.example.hellocat.viewModel;
 
-import android.arch.lifecycle.LiveData;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.hellocat.Contract2;
+import com.example.hellocat.contract.MvvmContract;
 import com.example.hellocat.bean.BreedImage;
 import com.example.hellocat.model.WikiModel;
 
-public class WikiViewModel implements Contract2.ILisener<BreedImage> {
+public class WikiViewModel implements MvvmContract.ILisener<BreedImage> {
 
-    WikiModel mWikimodel;
+
 
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> url = new ObservableField<>();

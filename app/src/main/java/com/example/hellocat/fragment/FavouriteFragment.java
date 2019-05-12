@@ -1,6 +1,5 @@
 package com.example.hellocat.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hellocat.BaseApplication;
-import com.example.hellocat.BreedWikiActivity;
-import com.example.hellocat.Contract;
+import com.example.hellocat.contract.MvpContract;
 import com.example.hellocat.adapter.FavouriteAdapter;
 import com.example.hellocat.bean.FavouriteCats;
-import com.example.hellocat.presenter.BreedPresenter;
 import com.example.hellocat.R;
-import com.example.hellocat.adapter.BreedAdapter;
-import com.example.hellocat.bean.Breed;
 import com.example.hellocat.presenter.FavouritePresenter;
 
 import java.util.List;
@@ -24,7 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavouriteFragment extends BaseFragment implements Contract.IView<FavouriteCats> {
+public class FavouriteFragment extends BaseFragment implements MvpContract.IView<FavouriteCats> {
     FavouritePresenter mPresenter;
 
     @BindView(R.id.favourite_recycle)

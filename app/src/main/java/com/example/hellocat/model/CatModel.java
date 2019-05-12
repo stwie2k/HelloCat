@@ -2,7 +2,7 @@ package com.example.hellocat.model;
 
 import android.util.Log;
 
-import com.example.hellocat.Contract;
+import com.example.hellocat.contract.MvpContract;
 import com.example.hellocat.DBHelper;
 import com.example.hellocat.network.RemoteService;
 import com.example.hellocat.bean.Breed;
@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class CatModel implements Contract.IModel {
+public class CatModel implements MvpContract.IModel {
 
     List<Breed> data;
     RemoteService service;
@@ -32,66 +32,7 @@ public class CatModel implements Contract.IModel {
          service = NetworkHelper.getRetrofit().create(RemoteService.class);
 
 
-//        service.getBreeds()//这里模拟请求数据集合
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//
-//                .flatMap(new Function<List<Breed>, ObservableSource<Breed>>() {
-//                    @Override
-//                    public ObservableSource<Breed> apply(@NonNull List<Breed> l) throws Exception {
-//                       index = 0;
-//                        return Observable.fromIterable(l);
-//                    }
-//                })
-//                //单独处理每个数据
-//                .map(new Function<Breed, String>() {
-//                    @Override
-//                    public String apply(@NonNull Breed b) throws Exception {
-//                        //这里需要使用map来绑定对象跟key key可以使用integer
-//                        map.put(index, b);
-//                        return b.getName();
-//                    }
-//                })
-//                .observeOn(Schedulers.io())
-//                .flatMap(new Function<String, ObservableSource<List<BreedImage>>>() {
-//                    @Override
-//                    public ObservableSource<List<BreedImage>> apply(@NonNull String ps) throws Exception {
-//                        //这边处理url 应该是请求接口B 我这就简单点处理了
-//                        ObservableSource<List<BreedImage>> o=service.getImage(ps);
-//                        return o;
-//                    }
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//
-//                .subscribe(new DisposableObserver<List<BreedImage>>() {
-//                    @Override
-//                    public void onComplete() {
-//
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(List<BreedImage> l) {
-//
-//                        for (BreedImage v : l) {
-//
-//                        }
-//                    }
-//
-//
-//
-//
-//
-//
-//
-//
-//                });
+
 
 
 

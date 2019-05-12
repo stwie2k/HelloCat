@@ -2,12 +2,9 @@ package com.example.hellocat.model;
 
 import android.util.Log;
 
-import com.com.sky.downloader.greendao.DaoSession;
-import com.example.hellocat.BaseApplication;
-import com.example.hellocat.Contract;
+import com.example.hellocat.contract.MvpContract;
 import com.example.hellocat.DBHelper;
 import com.example.hellocat.network.RemoteService;
-import com.example.hellocat.bean.Breed;
 import com.example.hellocat.bean.FavouriteCats;
 import com.example.hellocat.network.NetworkHelper;
 
@@ -19,11 +16,11 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class FavouriteModel implements Contract.IModel{
+public class FavouriteModel implements MvpContract.IModel{
     List<FavouriteCats> data;
      RemoteService service;
     @Override
-    public void getModel(final Contract.IModel.CallBack callBack){
+    public void getModel(final MvpContract.IModel.CallBack callBack){
         service = NetworkHelper.getRetrofit().create(RemoteService.class);
 
         service.getFavorites()

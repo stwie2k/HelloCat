@@ -3,6 +3,7 @@ package com.example.hellocat.network;
 
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.bean.BreedImage;
+import com.example.hellocat.bean.Categories;
 import com.example.hellocat.bean.FavouriteCats;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public interface RemoteService {
 
     @GET("/v1/categories")
 
-    Observable<List<BreedImage>> getCategories();
+    Observable<List<Categories>> getCategories();
 
 
 }

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.example.hellocat.presenter.BreedPresenter;
 import com.example.hellocat.BreedWikiActivity;
 import com.example.hellocat.bean.Breed;
-import com.example.hellocat.Contract;
+import com.example.hellocat.contract.MvpContract;
 import com.example.hellocat.R;
 import com.example.hellocat.adapter.BreedAdapter;
 
@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BreedFragment extends BaseFragment implements Contract.IView<Breed>{
+public class BreedFragment extends BaseFragment implements MvpContract.IView<Breed>{
     BreedPresenter mPresenter;
 
 
