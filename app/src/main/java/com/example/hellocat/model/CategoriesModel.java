@@ -2,6 +2,7 @@ package com.example.hellocat.model;
 
 import android.util.Log;
 
+import com.example.hellocat.DBHelper;
 import com.example.hellocat.contract.MvvmContract;
 import com.example.hellocat.bean.Categories;
 import com.example.hellocat.network.NetworkHelper;
@@ -40,13 +41,17 @@ public class CategoriesModel {
                     @Override
                     public void onError(Throwable e) {
 
-                        Log.d(TAG, "onError: e");
+                        lisener.loadSuccessful(DBHelper.getCategories());
+
+
 
                     }
 
                     @Override
                     public void onNext(List<Categories> l) {
 
+
+                        DBHelper.addCategories(l);
                         lisener.loadSuccessful(l);
 
 

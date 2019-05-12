@@ -4,6 +4,7 @@ import com.com.sky.downloader.greendao.BreedImageDao;
 import com.com.sky.downloader.greendao.DaoSession;
 import com.example.hellocat.bean.Breed;
 import com.example.hellocat.bean.BreedImage;
+import com.example.hellocat.bean.Categories;
 import com.example.hellocat.bean.FavouriteCats;
 
 import java.util.List;
@@ -88,6 +89,28 @@ public class DBHelper {
          }
 
         return null;
+
+    }
+
+    public static void addCategories(List<Categories> categoriesList){
+        DaoSession daoSession = BaseApplication.getDaoSession();
+        List<Categories> breeds = daoSession.loadAll(Categories.class);
+
+        if(breeds.size()>0){
+            return;
+        }
+
+
+        for(int i=0;i<categoriesList.size();i++){
+            Categories categories=categoriesList.get(i);
+            daoSession.getCategoriesDao().insert(categories);
+
+        }
+    }
+    public static List<Categories> getCategories(){
+        DaoSession daoSession = BaseApplication.getDaoSession();
+        List<Categories> categories = daoSession.getCategoriesDao().loadAll();
+        return categories;
 
     }
 
